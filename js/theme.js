@@ -22,7 +22,6 @@
     root.style.setProperty('--color-secondary', colors.secondary);
     root.style.setProperty('--color-glow', colors.glow);
 
-    // Opcional: mostrar el día actual en consola (para debugging)
     const dayNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     console.log(`[Theme] Hoy es ${dayNames[today]} — Colores aplicados: ${colors.primary} / ${colors.secondary}`);
 })();

@@ -1,398 +1,389 @@
-// script.js - ubicado en /js/
-
-// ==================== CATÁLOGO DE COLORES CON HEX ====================
-const catalogoPinturas = {
-    blackcolor: [
-        {id: "BF-804", hex: "#F3E5AB"}, {id: "BF-803", hex: "#FFF44F"},
-        {id: "BF-801", hex: "#FFD300"}, {id: "BF-802", hex: "#FFB92D"},
-        {id: "BF-806", hex: "#FF8000"}, {id: "BF-825", hex: "#F5F5DC"},
-        {id: "BF-826", hex: "#CC7722"}, {id: "BF-824", hex: "#F3D2B3"},
-        {id: "BF-820", hex: "#8DB600"}, {id: "BF-821", hex: "#00A86B"},
-        {id: "BF-822", hex: "#006400"}, {id: "BF-823", hex: "#004B49"},
-        {id: "BF-809", hex: "#B22222"}, {id: "BF-811", hex: "#960018"},
-        {id: "BF-827", hex: "#674834"}, {id: "BF-832", hex: "#FFFFFF"},
-        {id: "BF-819", hex: "#7FFFD4"}, {id: "BF-816", hex: "#87CEEB"},
-        {id: "BF-817", hex: "#002366"}, {id: "BF-818", hex: "#000080"},
-        {id: "BF-810", hex: "#D53032"}, {id: "BF-812", hex: "#FF00FF"},
-        {id: "BF-828", hex: "#B24A2C"}, {id: "BF-830", hex: "#808080"},
-        {id: "BF-805", hex: "#FF8C69"}, {id: "BF-807", hex: "#FFC0CB"},
-        {id: "BF-808", hex: "#FFE4E1"}, {id: "BF-814", hex: "#D8BFD8"},
-        {id: "BF-815", hex: "#8B00FF"}, {id: "BF-813", hex: "#610B0B"},
-        {id: "BF-829", hex: "#452721"}, {id: "BF-831", hex: "#000000"}
-    ],
-    la_nieve: [
-        {id: "LN-01", hex: "#F8F9FA"}, {id: "LN-02", hex: "#FFD300"},
-        {id: "LN-03", hex: "#FFFF00"}, {id: "LN-04", hex: "#F3D2B3"},
-        {id: "LN-05", hex: "#FF4500"}, {id: "LN-06", hex: "#B22222"},
-        {id: "LN-07", hex: "#C41E3A"}, {id: "LN-08", hex: "#610B0B"},
-        {id: "LN-09", hex: "#FFB7C5"}, {id: "LN-10", hex: "#FF00FF"},
-        {id: "LN-11", hex: "#DA70D6"}, {id: "LN-12", hex: "#9932CC"},
-        {id: "LN-13", hex: "#007FFF"}, {id: "LN-14", hex: "#0077BE"},
-        {id: "LN-15", hex: "#0047AB"}, {id: "LN-16", hex: "#00008B"},
-        {id: "LN-17", hex: "#00A86B"}, {id: "LN-18", hex: "#355E3B"},
-        {id: "LN-19", hex: "#006400"}, {id: "LN-20", hex: "#5C4033"},
-        {id: "LN-21", hex: "#1C1C1C"}, {id: "LN-22", hex: "#808080"}
-    ]
-};
-
-// Nombres de BLACKCOLOR en el orden correcto
-const blackcolorNombres = [
-    "Vainilla", "Amarillo Claro", "Amarillo Sol", "Amarillo Araguaney",
-    "Naranja", "Beige", "Ocre", "Piel",
-    "Verde Manzana", "Verde Perico", "Verde Navidad", "Verde Intenso",
-    "Rojo Navidad", "Carmín", "Marrón Avellana", "Blanco",
-    "Aguamarina", "Azul Cielo", "Azul Rey", "Azul Intenso",
-    "Rojo Fresa", "Fucsia", "Terracota", "Gris",
-    "Salmón", "Rosado", "Rosado Claro", "Lila",
-    "Violeta", "Vino Tinto", "Marrón Caoba", "Negro"
+// ========== DATOS ==========
+const lisoGrupos = [
+    { nombre: "Básicos y Neutros", colores: ["Blanco", "Beige Crema", "Piel Canela", "Gris Perla", "Gris", "Negro"] },
+    { nombre: "Amarillos y Naranjas", colores: ["Amarillo", "Amarillo Bandera", "Amarillo Oro", "Naranja Medio", "Naranja Intenso"] },
+    { nombre: "Rojos y Vinotinto", colores: ["Rojo", "Rojo Bandera", "Rojo Intenso", "Vinotinto"] },
+    { nombre: "Rosados y Fucsias", colores: ["Rosado Bebe", "Rosado", "Rosado Colonial", "Rosado V.", "Fucsia", "Fucsia New", "Fucsia Magenta", "Guayaba Salmón"] },
+    { nombre: "Morados y Lilas", colores: ["Lila", "Lila Medio", "Lila Oscuro", "Morado", "Morado Claro", "Azul Violeta", "Violeta Mora", "Violeta Obispo"] },
+    { nombre: "Azules", colores: ["Azul Bebe", "Azul Cielo", "Azul Claro", "Azul Celeste", "Azul Turquesa", "Azul Eléctrico", "Azul Rey", "Azul Marino", "Azul Ultra Marino", "Azul Bandera"] },
+    { nombre: "Verdes", colores: ["Verde Manzana", "Verde Neon", "Verde Claro", "Verde Grama", "Verde Mar", "Verde Aguamarino", "Verde Aquamarine", "Verde Esmeralda"] },
+    { nombre: "Tierra (Marrón)", colores: ["Marrón Claro", "Marrón Oscuro", "Marrón Chocolate", "Marrón Tabaco"] }
 ];
 
-// Nombres de LA NIEVE en el orden correcto
-const laNieveNombres = [
-    "Blanco Sierra Nevada", "Amarillo Turpial", "Amarillo Narciso", "Carne",
-    "Naranja Atardecer", "Rojo Navidad", "Rojo Cardenal", "Vinotinto",
-    "Rosado Apamate", "Fucsia Trinitaria", "Orquídea", "Violeta Buganvilla",
-    "Azul Los Roques", "Azul Mar Caribe", "Azul Mochima", "Azul Choroní",
-    "Verde Canaima", "Verde Amazona", "Verde Navidad", "Marrón Gran Sabana",
-    "Negro Petróleo", "Gris"
+const escarchadoGrupos = [
+    { nombre: "Metales y Neutros", colores: ["Blanco", "Blanco Tornasol", "Plata", "Gris Oscuro", "Negro", "Beige", "Champagne", "Café", "Marrón Oscuro", "Marrón Tornasol"] },
+    { nombre: "Dorados y Bronces", colores: ["Amarillo", "Amarillo Oscuro", "Dorado Claro", "Dorado Oscuro", "Oro Rico", "Oro Ducato", "Oro", "Bronce", "Cobre", "Rosa Oro / Oro Rosa"] },
+    { nombre: "Rojos y Naranjas", colores: ["Naranja", "Rojo", "Rojo Navidad", "Rojo Ladrillo", "Vinotinto"] },
+    { nombre: "Rosados y Fucsias", colores: ["Rosa Pastel", "Rosa Claro", "Rosado", "Rosa C", "Rosa Vieja", "Frambuesa", "Fucsia", "Magenta"] },
+    { nombre: "Morados y Lilas", colores: ["Lila", "Lila Tornasol", "Morado", "Violeta"] },
+    { nombre: "Azules", colores: ["Azul Pastel", "Azul Cielo", "Azul Celeste", "Azul Turquesa", "Azul Zafiro", "Azul Rey", "Azul Marino"] },
+    { nombre: "Verdes", colores: ["Verde Mar", "Verde Aguamarina", "Verde Jade", "Verde Esmeralda", "Verde Grama"] }
 ];
 
-// Construir lista de productos con su color hex
-const products = [];
-
-// BLACKCOLOR
-for (let i = 0; i < catalogoPinturas.blackcolor.length; i++) {
-    const colorData = catalogoPinturas.blackcolor[i];
-    const nombre = blackcolorNombres[i];
-    products.push({
-        id: `black_${colorData.id.replace(/-/g, "_")}`,
-        nombre: `${nombre} (${colorData.id})`,
-        categoria: "BLACKCOLOR",
-        presentacion: "Envase 60ml",
-        contenido: 1,
-        stock: 999,
-        tipoUnidad: "unidad",
-        step: 3,
-        minimo: 3,
-        hex: colorData.hex
-    });
+function getHexFromName(nombre) {
+    const mapa = {
+        "Blanco":"#FFFFFF","Beige Crema":"#F5E6D3","Piel Canela":"#D2B48C","Gris Perla":"#B0B0B0","Gris":"#808080","Negro":"#1A1A1A",
+        "Amarillo":"#FFE135","Amarillo Bandera":"#FFD700","Amarillo Oro":"#FFC200","Naranja Medio":"#FF8C00","Naranja Intenso":"#FF6600",
+        "Rojo":"#E60000","Rojo Bandera":"#CE1126","Rojo Intenso":"#CC0000","Vinotinto":"#5C1018",
+        "Rosado Bebe":"#FFB6C1","Rosado":"#FF91A4","Rosado Colonial":"#F4A460","Rosado V.":"#E88DA0","Fucsia":"#E91E8C","Fucsia New":"#FF00AA","Fucsia Magenta":"#FF1493","Guayaba Salmón":"#FA8072",
+        "Lila":"#C8A2C8","Lila Medio":"#BA55D3","Lila Oscuro":"#8B008B","Morado":"#7B2D8E","Morado Claro":"#AF7AC5","Azul Violeta":"#8A2BE2","Violeta Mora":"#4B0082","Violeta Obispo":"#9400D3",
+        "Azul Bebe":"#89CFF0","Azul Cielo":"#87CEEB","Azul Claro":"#6CB4EE","Azul Celeste":"#ADD8E6","Azul Turquesa":"#40E0D0","Azul Eléctrico":"#2E5EAA","Azul Rey":"#1A3C8F","Azul Marino":"#1B2A6B","Azul Ultra Marino":"#0D1B7A","Azul Bandera":"#00308F",
+        "Verde Manzana":"#8DB600","Verde Neon":"#39FF14","Verde Claro":"#90EE90","Verde Grama":"#4CAF50","Verde Mar":"#2E8B57","Verde Aguamarino":"#3EB489","Verde Aquamarine":"#7FFFD4","Verde Esmeralda":"#50C878",
+        "Marrón Claro":"#A0522D","Marrón Oscuro":"#3E2723","Marrón Chocolate":"#5D3A1A","Marrón Tabaco":"#6F4E37",
+        "Blanco Tornasol":"#F0F0F0","Plata":"#C0C0C0","Champagne":"#F7E7CE","Café":"#6F4E37","Marrón Tornasol":"#5D4037","Amarillo Oscuro":"#D4A017","Dorado Claro":"#F0D58C","Dorado Oscuro":"#B8860B","Oro Rico":"#FFD700","Oro Ducato":"#DAA520","Oro":"#DAA520","Bronce":"#CD7F32","Cobre":"#B87333","Rosa Oro / Oro Rosa":"#E8B4B8",
+        "Naranja":"#FFA500","Rojo Navidad":"#B22222","Rojo Ladrillo":"#B5462A","Rosa Pastel":"#F4C2C2","Rosa Claro":"#FFC0CB","Rosa C":"#FF69B4","Rosa Vieja":"#D4788C","Frambuesa":"#E30B5C","Magenta":"#FF00FF","Lila Tornasol":"#C8A2C8","Violeta":"#8B00FF","Azul Pastel":"#A4C8E1","Azul Zafiro":"#0F52BA","Verde Aguamarina":"#66CDAA","Verde Jade":"#00A86B"
+    };
+    return mapa[nombre] || "#CCCCCC";
 }
 
-// LA NIEVE
-for (let i = 0; i < catalogoPinturas.la_nieve.length; i++) {
-    const colorData = catalogoPinturas.la_nieve[i];
-    const nombre = laNieveNombres[i];
-    products.push({
-        id: `lanieve_${colorData.id.toLowerCase()}`,
-        nombre: nombre,
-        categoria: "LA NIEVE",
-        presentacion: "Envase 60ml",
-        contenido: 1,
-        stock: 999,
-        tipoUnidad: "unidad",
-        step: 3,
-        minimo: 3,
-        hex: colorData.hex
-    });
-}
+const totalLiso = lisoGrupos.reduce((a,g)=>a+g.colores.length,0);
+const totalEscarchado = escarchadoGrupos.reduce((a,g)=>a+g.colores.length,0);
 
-// ==================== LÓGICA DEL CARRITO ====================
+const categories = [
+    { id: "carta-liso", nombre: "Foami Tamaño Carta Liso", tamaño: "Tamaño Carta", tipo: "liso", icono: "layers", esPaquete: true, paqueteUnidades: 10, totalColores: totalLiso },
+    { id: "carta-esc", nombre: "Foami Tamaño Carta Escarchado", tamaño: "Tamaño Carta", tipo: "escarchado", icono: "sparkles", esPaquete: true, paqueteUnidades: 10, totalColores: totalEscarchado },
+    { id: "doble-liso", nombre: "Foami Doble Carta Liso", tamaño: "Doble Carta", tipo: "liso", icono: "square", esPaquete: true, paqueteUnidades: 10, totalColores: totalLiso },
+    { id: "doble-esc", nombre: "Foami Doble Carta Escarchado", tamaño: "Doble Carta", tipo: "escarchado", icono: "gem", esPaquete: true, paqueteUnidades: 10, totalColores: totalEscarchado },
+    { id: "lamina-liso", nombre: "Lámina 60×80 Liso", tamaño: "Lámina 60×80", tipo: "liso", icono: "maximize-2", esPaquete: false, totalColores: totalLiso },
+    { id: "lamina-esc", nombre: "Lámina 60×80 Escarchado", tamaño: "Lámina 60×80", tipo: "escarchado", icono: "crown", esPaquete: false, totalColores: totalEscarchado }
+];
+
 let cart = [];
 let currentCategory = null;
 
-function escapeHtml(str) {
-    return str.replace(/[&<>]/g, m => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;" }[m]));
+// ========== HELPERS ==========
+function getCartColor(totalUnits) {
+    let t = Math.min(totalUnits, 100) / 100;
+    let hue = 150 - (t * 125);
+    let sat = 70 + (t * 20);
+    let light = 45 + (t * 10);
+    return `hsl(${hue}, ${sat}%, ${light}%)`;
 }
 
-function showToast(msg) {
-    let toast = document.createElement("div");
-    toast.className = "fixed bottom-10 left-1/2 -translate-x-1/2 bg-black/90 border border-neon-primary text-neon-primary text-[11px] font-bold tracking-widest uppercase px-6 py-3 rounded-full z-[100] shadow-2xl toast-animate";
-    toast.innerText = msg;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 2500);
+function saveCart() { localStorage.setItem("foami_cart_lux", JSON.stringify(cart)); }
+function loadCart() { const s = localStorage.getItem("foami_cart_lux"); if(s) try { cart = JSON.parse(s); if(!Array.isArray(cart)) cart=[]; } catch(e){cart=[];} updateCartUI(); }
+function isVeryLight(hex) { if(!hex) return false; const r=parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), b=parseInt(hex.slice(5,7),16); return (r*0.299+g*0.587+b*0.114)>210; }
+function escapeHtml(str) { return str.replace(/[&<>]/g, m => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;" }[m])); }
+function showToast(msg, hex) {
+    const ctn = document.getElementById("toastContainer"); if(!ctn) return;
+    const t = document.createElement("div"); t.className = "toast-enter pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-xl glass backdrop-blur-md border border-white/15 max-w-xs shadow-xl";
+    t.innerHTML = `<div class="w-3 h-3 rounded-full shadow-md" style="background-color:${hex}"></div><span class="text-sm text-white font-medium">${escapeHtml(msg)}</span>`;
+    ctn.appendChild(t);
+    setTimeout(() => { t.remove(); }, 2200);
 }
 
-function saveCart() {
-    localStorage.setItem("guicar_cart_pinturas", JSON.stringify(cart));
-}
-
-function loadCart() {
-    let s = localStorage.getItem("guicar_cart_pinturas");
-    cart = s ? JSON.parse(s) : [];
-    updateCartUI();
-}
-
-function formatCantidadConPaquetes(envases) {
-    if (envases === 0) return "0 und";
-    let paquetes12 = Math.floor(envases / 12);
-    let resto = envases % 12;
-    let partes = [];
-    if (paquetes12 > 0) {
-        partes.push(`${paquetes12} paquete${paquetes12 !== 1 ? 's' : ''} (${paquetes12 * 12} und)`);
-    }
-    if (resto > 0) {
-        partes.push(`${resto} und`);
-    }
-    return partes.join(" + ");
-}
-
-function addToCart(product) {
-    let existing = cart.find(i => i.productId === product.id);
-    if (existing) {
-        let nueva = existing.cantidad + product.step;
-        if (nueva > product.stock) {
-            showToast(`Stock máximo para ${product.nombre}`);
-            return;
-        }
-        existing.cantidad = nueva;
+// ========== CARRITO ==========
+function addToCart(category, nombre, hex) {
+    const existing = cart.find(i => i.categoryId === category.id && i.nombre === nombre);
+    const addUnits = category.esPaquete ? category.paqueteUnidades : 1;
+    if(existing) {
+        existing.cantidadUnidades += addUnits;
     } else {
         cart.push({
-            productId: product.id,
-            nombre: product.nombre,
-            categoria: product.categoria,
-            presentacion: product.presentacion,
-            contenido: product.contenido,
-            cantidad: product.minimo,
-            stockMax: product.stock,
-            tipoUnidad: product.tipoUnidad,
-            step: product.step,
-            hex: product.hex
+            id: Date.now()+Math.random(),
+            categoryId: category.id,
+            categoryNombre: category.nombre,
+            nombre: nombre,
+            hex: hex,
+            esPaquete: category.esPaquete,
+            unidadesPorPaquete: category.esPaquete ? category.paqueteUnidades : 1,
+            cantidadUnidades: addUnits
         });
     }
-    saveCart();
-    updateCartUI();
-    showToast(`✓ ${product.nombre} · +3 und`);
+    saveCart(); updateCartUI();
+    const msg = category.esPaquete ? `+1 paquete (${category.paqueteUnidades} und) · ${nombre}` : `+1 unidad · ${nombre}`;
+    showToast(msg, hex);
 }
 
-function changeQty(productId, delta) {
-    let idx = cart.findIndex(i => i.productId === productId);
-    if (idx === -1) return;
-    let step = cart[idx].step || 3;
-    let nueva = cart[idx].cantidad + (delta * step);
-    if (nueva <= 0) {
-        cart.splice(idx, 1);
-    } else {
-        if (nueva > cart[idx].stockMax) nueva = cart[idx].stockMax;
-        cart[idx].cantidad = nueva;
+function changeQty(idx, deltaUnidades) {
+    const item = cart[idx];
+    if(!item) return;
+    let nueva = item.cantidadUnidades + deltaUnidades;
+    if(nueva <= 0) cart.splice(idx,1);
+    else {
+        if(item.esPaquete) {
+            let resto = nueva % item.unidadesPorPaquete;
+            if(resto !== 0) nueva = nueva - resto;
+            if(nueva <= 0) cart.splice(idx,1);
+            else item.cantidadUnidades = nueva;
+        } else { item.cantidadUnidades = nueva; }
     }
-    saveCart();
-    updateCartUI();
+    saveCart(); updateCartUI();
 }
 
-// ==================== MODAL DE CONFIRMACIÓN ====================
+function clearCart() { cart = []; saveCart(); updateCartUI(); showToast("Carrito vaciado", "#888"); }
+
+// ========== MODAL ==========
 function openClearModal() {
     const modal = document.getElementById('clearModal');
+    if (!modal) return;
     modal.classList.remove('opacity-0', 'pointer-events-none');
-    modal.querySelector('.modal-card').classList.remove('scale-95');
-    modal.querySelector('.modal-card').classList.add('scale-100');
+    modal.classList.add('opacity-100', 'pointer-events-auto');
     document.body.style.overflow = 'hidden';
+    const card = modal.querySelector('.relative');
+    if (card) {
+        card.classList.remove('scale-95');
+        card.classList.add('scale-100');
+    }
 }
 
 function closeClearModal() {
     const modal = document.getElementById('clearModal');
+    if (!modal) return;
+    modal.classList.remove('opacity-100', 'pointer-events-auto');
     modal.classList.add('opacity-0', 'pointer-events-none');
-    modal.querySelector('.modal-card').classList.remove('scale-100');
-    modal.querySelector('.modal-card').classList.add('scale-95');
     document.body.style.overflow = '';
+    const card = modal.querySelector('.relative');
+    if (card) {
+        card.classList.remove('scale-100');
+        card.classList.add('scale-95');
+    }
 }
 
 function confirmClearCart() {
+    clearCart();
     closeClearModal();
-    cart = [];
-    saveCart();
-    updateCartUI();
-    showToast('Carrito vaciado');
 }
 
-// ==================== ACTUALIZAR UI DEL CARRITO ====================
+// ========== ACTUALIZAR UI DEL CARRITO ==========
 function updateCartUI() {
-    let totalEnvases = cart.reduce((s, i) => s + i.cantidad, 0);
-    let totalPaquetesDe3 = totalEnvases / 3;
-    let badge = document.getElementById("cartBadge");
-    if (badge) {
-        if (totalEnvases > 0) {
-            badge.innerText = totalPaquetesDe3 > 99 ? "99+" : totalPaquetesDe3;
-            badge.classList.remove("hidden");
-            badge.classList.add("flex");
-        } else {
-            badge.classList.add("hidden");
-        }
-    }
-    document.getElementById("cartCount").innerHTML = `(<span class="text-neon-green font-bold text-base">${totalEnvases} envases</span>)`;
+    const totalUnits = cart.reduce((s,i)=>s+i.cantidadUnidades, 0);
+    const totalPackages = cart.reduce((s,i)=>s + (i.esPaquete ? (i.cantidadUnidades / i.unidadesPorPaquete) : i.cantidadUnidades), 0);
     
-    let emptyDiv = document.getElementById("cartEmpty"),
-        itemsDiv = document.getElementById("cartItems"),
-        footer = document.getElementById("cartFooter");
-    if (totalEnvases === 0) {
-        emptyDiv.classList.remove("hidden");
-        itemsDiv.classList.add("hidden");
-        footer.classList.add("hidden");
-        return;
+    const cartColor = getCartColor(totalUnits);
+    const badgeEl = document.getElementById('cartBadge');
+    if (badgeEl) {
+        badgeEl.style.backgroundColor = cartColor;
+        badgeEl.style.transition = 'background-color 0.2s ease';
     }
-    emptyDiv.classList.add("hidden");
-    itemsDiv.classList.remove("hidden");
-    footer.classList.remove("hidden");
+    const floatingBtn = document.getElementById('floatingCartBtn');
+    if (floatingBtn) {
+        floatingBtn.style.borderColor = cartColor;
+        floatingBtn.style.boxShadow = `0 0 8px ${cartColor}`;
+    }
+    const cartIcon = document.querySelector('header button i');
+    if (cartIcon) {
+        cartIcon.style.color = totalUnits > 0 ? cartColor : '';
+    }
 
-    // Botón "Vaciar Carrito" dentro de la lista (con el mismo tamaño que "Envase 60ml")
-    let itemsHtml = `<div class="flex justify-end mb-4">
-        <button onclick="openClearModal()" class="flex items-center gap-2 text-neon-green text-xs md:text-sm font-medium hover:underline transition-colors">
-            <i data-lucide="trash-2" class="w-4 h-4"></i> Vaciar Carrito
-        </button>
-    </div>`;
+    const fbadge = document.getElementById('floatingBadge');
+    const emptyDiv = document.getElementById('cartEmpty');
+    const itemsDiv = document.getElementById('cartItems');
+    const footer = document.getElementById('cartFooter');
 
-    itemsHtml += cart.map(item => {
-        let envases = item.cantidad;
-        let cantidadTexto = formatCantidadConPaquetes(envases);
-        let paquetesDe3 = envases / 3;
-        let colorCircle = `<span class="color-circle" style="background: ${item.hex};"></span>`;
-        return `<div class="glass-card p-5 rounded-3xl flex flex-col gap-4">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="font-semibold text-white tracking-tight leading-tight mb-1">${colorCircle}${escapeHtml(item.nombre)}</p>
-                            <p class="text-neon-green text-xs md:text-sm font-medium">${item.presentacion}</p>
-                        </div>
-                        <button onclick="changeQty('${item.productId}', -${item.cantidad})" class="text-zinc-600 hover:text-neon-primary transition-colors">
-                            <i data-lucide="trash-2" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <!-- Cantidad con el mismo tamaño que "Envase 60ml" -->
-                        <div class="text-xs md:text-sm font-bold neon-primary uppercase tracking-tighter">
-                            ${cantidadTexto}
-                        </div>
-                        <div class="flex items-center gap-1 bg-white/5 rounded-full p-1 border border-white/5">
-                            <button onclick="changeQty('${item.productId}', -1)" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/10"><i data-lucide="minus" class="w-4 h-4"></i></button>
-                            <span class="w-8 text-center text-sm font-bold text-white">${paquetesDe3}</span>
-                            <button onclick="changeQty('${item.productId}', 1)" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/10"><i data-lucide="plus" class="w-4 h-4"></i></button>
-                        </div>
-                    </div>
-                </div>`;
-    }).join("");
+    if (totalUnits > 0) {
+        badgeEl?.classList.remove('hidden'); badgeEl?.classList.add('flex','badge-bounce');
+        const badgeText = totalPackages > 99 ? '99+' : totalPackages;
+        badgeEl.textContent = badgeText;
+        if(fbadge) { fbadge.textContent = badgeText; fbadge.classList.remove('hidden'); fbadge.classList.add('flex'); fbadge.style.backgroundColor = cartColor; }
+        emptyDiv?.classList.add('hidden'); itemsDiv?.classList.remove('hidden');
+        footer?.classList.remove('hidden'); footer?.classList.add('flex','flex-col');
+        setTimeout(() => badgeEl?.classList.remove('badge-bounce'), 400);
+    } else {
+        badgeEl?.classList.add('hidden'); badgeEl?.classList.remove('flex');
+        if(fbadge) fbadge.classList.add('hidden');
+        emptyDiv?.classList.remove('hidden'); itemsDiv?.classList.add('hidden');
+        footer?.classList.add('hidden'); footer?.classList.remove('flex','flex-col');
+    }
 
-    itemsDiv.innerHTML = itemsHtml;
-    
-    // Resumen por marca con formato de paquetes
-    let summaryMap = new Map();
+    // Desglose por categorías
+    const categorias = {
+        "carta-liso": { paq: 0, und: 0, nombre: "Carta Liso" },
+        "carta-esc": { paq: 0, und: 0, nombre: "Carta Escarchado" },
+        "doble-liso": { paq: 0, und: 0, nombre: "Doble Carta Liso" },
+        "doble-esc": { paq: 0, und: 0, nombre: "Doble Carta Escarchado" },
+        "lamina-liso": { paq: 0, und: 0, nombre: "Lámina Liso" },
+        "lamina-esc": { paq: 0, und: 0, nombre: "Lámina Escarchado" }
+    };
     cart.forEach(item => {
-        let marca = item.categoria;
-        let env = item.cantidad;
-        if (summaryMap.has(marca)) {
-            summaryMap.get(marca).envases += env;
-        } else {
-            summaryMap.set(marca, { envases: env });
+        const catId = item.categoryId;
+        if (categorias[catId]) {
+            if (item.esPaquete) {
+                const paquetes = item.cantidadUnidades / item.unidadesPorPaquete;
+                categorias[catId].paq += paquetes;
+                categorias[catId].und += item.cantidadUnidades;
+            } else {
+                categorias[catId].paq += item.cantidadUnidades;
+                categorias[catId].und += item.cantidadUnidades;
+            }
         }
     });
-    let summaryDiv = document.getElementById("cartSummaryLines");
-    if (summaryDiv) {
-        let html = "";
-        for (let [marca, val] of summaryMap.entries()) {
-            let totalTexto = formatCantidadConPaquetes(val.envases);
-            html += `<span class="bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-[9px] font-bold px-3 py-1.5 rounded-full border border-[var(--color-primary)]/30 uppercase tracking-wider">${marca}: ${totalTexto}</span>`;
+
+    let desgloseHtml = '';
+    for (const [key, val] of Object.entries(categorias)) {
+        if (val.paq > 0) {
+            const icon = (key.includes('lamina') ? 'maximize-2' : (key.includes('esc') ? 'sparkles' : 'layers'));
+            desgloseHtml += `<span class="inline-flex items-center gap-1 font-bold"><i data-lucide="${icon}" class="w-4 h-4 text-neon-green"></i><span class="text-neon-green">${val.nombre}:</span> ${val.paq} paq (${val.und} und)</span>`;
         }
-        summaryDiv.innerHTML = html;
     }
-    lucide.createIcons();
-}
-
-function sendWhatsApp() {
-    if (cart.length === 0) {
-        alert("Carrito vacío");
-        return;
+    if (cart.length > 0) {
+        desgloseHtml += `<span class="text-amber-400 font-bold ml-2">${cart.length} producto(s) distinto(s)</span>`;
     }
-    let msg = `📋 SOLICITUD DE COTIZACIÓN - PINTURAS AL FRÍO%0A%0A`;
-    msg += `Destinatario: INVERSIONES GUICAR 2025%0A%0A`;
-    msg += `Estimados, reciban un cordial saludo. Agradecemos cotización de los siguientes colores (múltiplos de 3 envases):%0A%0A`;
-    
-    cart.forEach(item => {
-        let envases = item.cantidad;
-        let cantidadTexto = formatCantidadConPaquetes(envases);
-        msg += `🔹 ${item.nombre}%0A`;
-        msg += `➤ ${cantidadTexto}%0A%0A`;
-    });
-    
-    let totalEnvases = cart.reduce((s, i) => s + i.cantidad, 0);
-    let totalTexto = formatCantidadConPaquetes(totalEnvases);
-    msg += `📦 RESUMEN TOTAL%0A`;
-    msg += `• ${totalTexto}%0A%0A`;
-    msg += `✨ Gestión de Ventas: JONATHAN RANGEL%0A`;
-    msg += `Quedo atento a su pronta respuesta.`;
-    
-    window.open(`https://wa.me/584122891366?text=${msg}`, '_blank');
-}
 
-function getCategories() {
-    return [
-        { id: "blackcolor", nombre: "BLACKCOLOR" },
-        { id: "la-nieve", nombre: "LA NIEVE" }
-    ];
-}
-
-function renderCategories() {
-    let cats = getCategories();
-    let grid = document.getElementById("categoryGrid");
-    grid.innerHTML = cats.map(cat => `<div class="glass-card rounded-3xl p-8 cursor-pointer flex flex-col items-center text-center group" onclick="openCategory('${cat.id}')">
-                <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[var(--color-primary)]/10 transition-all duration-500">
-                    <i data-lucide="droplet" class="w-8 h-8 text-white/40 group-hover:text-[var(--color-primary)] transition-colors"></i>
+    if (footer) {
+        footer.innerHTML = `
+            <div class="flex flex-wrap items-center justify-between gap-2 text-base font-bold">
+                <div id="cartSummaryLines" class="flex flex-wrap items-center gap-2 text-zinc-300">${desgloseHtml}</div>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-base text-zinc-400 font-bold">Total unidades</span>
+                    <span id="cartTotal" class="text-base font-bold text-white">${totalUnits}</span>
                 </div>
-                <h3 class="text-xl font-medium tracking-tight text-white mb-2">${cat.nombre}</h3>
-                <p class="text-zinc-500 text-xs uppercase tracking-widest font-bold group-hover:text-[var(--color-primary)] transition-colors">Ver colores</p>
-            </div>`).join("");
+            </div>
+            <button onclick="sendWhatsApp()" class="w-full bg-gradient-to-r from-[#25D366] to-[#128C7E] py-3.5 rounded-xl text-white font-bold flex items-center justify-center gap-2 shadow-xl hover:scale-[1.02] transition-transform active:scale-95">
+                <i data-lucide="send" class="w-4 h-4"></i>Enviar pedido por WhatsApp
+            </button>
+            <button onclick="openClearModal()" class="w-full py-4 text-sm md:text-base font-bold uppercase tracking-wider rounded-xl border border-white/10 text-zinc-300 hover:text-white hover:bg-white/5 transition">Vaciar carrito</button>
+        `;
+        lucide.createIcons();
+    }
+
+    if(itemsDiv) {
+        let itemsHtml = cart.map((item, idx) => {
+            const totalItemUnits = item.cantidadUnidades;
+            let textoUnidad = '';
+            if (item.esPaquete) {
+                const paquetes = totalItemUnits / item.unidadesPorPaquete;
+                textoUnidad = `${paquetes} paquete(s) = ${totalItemUnits} und`;
+            } else {
+                textoUnidad = `${totalItemUnits} unidad(es)`;
+            }
+            let catBadge = '';
+            if (item.categoryId.includes('carta')) catBadge = '<span class="text-[8px] bg-sky-500/20 text-sky-300 px-1.5 py-0.5 rounded-full">Tamaño Carta</span>';
+            else if (item.categoryId.includes('doble')) catBadge = '<span class="text-[8px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded-full">Doble Carta</span>';
+            else if (item.categoryId.includes('lamina')) catBadge = '<span class="text-[8px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full">Lámina</span>';
+            const cantidadClase = "text-xs md:text-sm font-bold neon-primary uppercase tracking-tighter";
+            return `<div class="flex items-center gap-3 p-3 rounded-xl glass-card bg-black/40 slide-in">
+                <div class="w-11 h-11 rounded-xl border border-white/10" style="background:${item.hex}; box-shadow:0 2px 6px rgba(0,0,0,0.3);"></div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <p class="text-sm font-semibold text-white truncate">${escapeHtml(item.nombre)}</p>
+                        ${catBadge}
+                    </div>
+                    <p class="text-sm text-neon-green font-semibold">${escapeHtml(item.categoryNombre)}</p>
+                    <p class="${cantidadClase}">${textoUnidad}</p>
+                </div>
+                <div class="flex items-center gap-1">
+                    <button onclick="changeQty(${idx}, -${item.unidadesPorPaquete})" class="w-7 h-7 rounded-md bg-white/5 hover:bg-white/10 flex items-center justify-center"><i data-lucide="minus" class="w-3.5 h-3.5 text-white"></i></button>
+                    <span class="w-6 text-center text-sm text-white">${item.esPaquete ? (item.cantidadUnidades / item.unidadesPorPaquete) : item.cantidadUnidades}</span>
+                    <button onclick="changeQty(${idx}, ${item.unidadesPorPaquete})" class="w-7 h-7 rounded-md bg-white/5 hover:bg-white/10 flex items-center justify-center"><i data-lucide="plus" class="w-3.5 h-3.5 text-white"></i></button>
+                    <button onclick="changeQty(${idx}, -${item.cantidadUnidades})" class="w-7 h-7 rounded-md bg-white/5 hover:bg-red-500/20 flex items-center justify-center ml-1"><i data-lucide="trash-2" class="w-3.5 h-3.5 text-red-300"></i></button>
+                </div>
+            </div>`;
+        }).join('');
+        itemsDiv.innerHTML = itemsHtml;
+        lucide.createIcons();
+    }
+}
+
+// ========== RENDER CATEGORÍAS ==========
+function renderCategories() {
+    const grid = document.getElementById("categoryGrid");
+    if(!grid) return;
+    grid.innerHTML = categories.map(cat => `
+        <div class="glass-card rounded-2xl p-5 cursor-pointer transition-all duration-300 hover:border-orange-500/40 group" onclick="openCategory('${cat.id}')">
+            <div class="flex justify-between items-start mb-4">
+                <div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center border border-white/10">
+                    <i data-lucide="layers" class="w-5 h-5 text-orange-400"></i>
+                </div>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-1.5">${cat.nombre}</h3>
+            <p class="text-white font-bold mb-3" style="text-shadow: 0 0 10px rgba(255,255,255,0.6);">✨ ${cat.totalColores} colores disponibles</p>
+            <p class="text-base font-bold text-neon-green">${cat.esPaquete ? 'Paquete x10 unidades' : 'Venta por unidad'}</p>
+            <div class="mt-4 text-orange-400 text-sm flex items-center gap-1 font-medium group-hover:gap-2 transition-all">Explorar paleta <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></div>
+        </div>
+    `).join('');
     lucide.createIcons();
 }
 
 function openCategory(catId) {
-    let catNombre = catId === "blackcolor" ? "BLACKCOLOR" : "LA NIEVE";
-    currentCategory = catNombre;
-    document.getElementById("categoriesView").style.display = "none";
-    document.getElementById("productsView").style.display = "block";
-    let prods = products.filter(p => p.categoria === catNombre);
-    let html = `<div class="mb-10">
-                    <h2 class="text-4xl font-light tracking-tight">${catNombre} <span class="font-bold text-neon-green">Pinturas al Frío</span></h2>
-                    <p class="text-neon-green text-sm md:text-base font-medium mt-1">Venta por múltiplos de 3 envases · 12 und = 1 paquete</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">`;
-    prods.forEach(p => {
-        let colorCircle = `<span class="color-circle" style="background: ${p.hex};"></span>`;
-        html += `<div class="glass-card p-6 rounded-3xl flex justify-between items-center group">
-                            <div>
-                                <h3 class="font-bold text-white group-hover:text-[var(--color-primary)] transition-colors">${colorCircle}${escapeHtml(p.nombre)}</h3>
-                                <p class="text-neon-green text-xs md:text-sm font-medium mt-1">Envase 60ml · Agregar 3 und</p>
-                            </div>
-                            <button onclick="addToCartById('${p.id}')" class="btn-agregar px-6 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest">AGREGAR</button>
-                        </div>`;
-    });
-    html += `</div>`;
-    document.getElementById("productsContent").innerHTML = html;
-    lucide.createIcons();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    currentCategory = categories.find(c=>c.id===catId);
+    if(!currentCategory) return;
+    document.getElementById("categoriesView").classList.add("hidden");
+    document.getElementById("colorsView").classList.remove("hidden");
+    if(!document.getElementById("backBtnContainer")) addBackButton();
+    document.getElementById("backBtnContainer").classList.remove("hidden");
+    renderColorsView();
+    window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function addToCartById(pid) {
-    let product = products.find(p => p.id === pid);
-    if (product) addToCart(product);
+function addBackButton() {
+    if(document.getElementById("backBtnContainer")) return;
+    const colorsView = document.getElementById("colorsView");
+    const container = document.createElement("div");
+    container.id = "backBtnContainer";
+    container.className = "mb-5 flex items-center gap-3";
+    container.innerHTML = `<button onclick="goBack()" class="flex items-center gap-1.5 text-white/80 hover:text-white font-bold glass px-4 py-2 rounded-full text-sm transition-all"><i data-lucide="arrow-left" class="w-4 h-4"></i> Volver a categorías</button><span id="categoryTitle" class="text-lg font-bold text-white"></span>`;
+    colorsView.insertBefore(container, colorsView.firstChild);
+    lucide.createIcons();
+}
+
+function renderColorsView() {
+    const cont = document.getElementById("colorsContent");
+    if(!cont || !currentCategory) return;
+    const grupos = currentCategory.tipo === "liso" ? lisoGrupos : escarchadoGrupos;
+    const titleSpan = document.getElementById("categoryTitle");
+    if(titleSpan) titleSpan.innerText = `— ${currentCategory.nombre}`;
+    let html = `<div class="mb-8 flex flex-wrap items-center gap-3 border-b border-white/10 pb-4"><div class="p-2 rounded-xl glass"><i data-lucide="${currentCategory.icono}" class="w-7 h-7 text-orange-400"></i></div><div><h2 class="text-3xl font-bold text-white">${currentCategory.nombre}</h2>
+        <p class="text-base font-bold text-neon-green">${currentCategory.esPaquete ? 'Venta por paquetes de 10 unidades' : 'Venta por unidad (lámina individual)'}</p>
+    </div></div>`;
+    grupos.forEach(grupo => {
+        html += `<div class="mb-12"><div class="flex items-baseline gap-2 border-l-4 border-orange-500 pl-3 mb-4">
+            <h3 class="text-lg font-bold text-white">${grupo.nombre}</h3>
+            <span class="text-lg font-bold text-neon-green">${grupo.colores.length} tonos</span>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">`;
+        grupo.colores.forEach(color => {
+            const hex = getHexFromName(color);
+            const borderLight = isVeryLight(hex) ? 'border border-white/50' : '';
+            html += `<div class="swatch-item group relative rounded-2xl glass-card p-3 text-center cursor-pointer transition-all duration-200 hover:bg-white/5" onclick="addToCart(currentCategory, '${escapeHtml(color)}', '${hex}')">
+                <div class="w-full aspect-square rounded-xl ${borderLight} shadow-inner transition-all duration-200 group-hover:shadow-lg" style="background-color: ${hex};"></div>
+                <p class="text-sm font-bold text-neon-green truncate mt-2">${color}</p>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 backdrop-blur-sm rounded-2xl"><div class="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center shadow-md"><i data-lucide="plus" class="w-4 h-4 text-black"></i></div></div>
+            </div>`;
+        });
+        html += `</div></div>`;
+    });
+    cont.innerHTML = html;
+    lucide.createIcons();
 }
 
 function goBack() {
-    document.getElementById("categoriesView").style.display = "block";
-    document.getElementById("productsView").style.display = "none";
+    document.getElementById("categoriesView").classList.remove("hidden");
+    document.getElementById("colorsView").classList.add("hidden");
+    document.getElementById("backBtnContainer").classList.add("hidden");
+    window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function openCart() {
-    document.getElementById("cartPanel").classList.remove("closed");
-    document.getElementById("cartPanel").classList.add("open");
-    document.getElementById("cartOverlay").classList.remove("opacity-0", "pointer-events-none");
-    document.body.style.overflow = "hidden";
+// ========== PANEL CARRITO ==========
+function openCart() { 
+    document.getElementById("cartPanel").classList.remove("closed"); 
+    document.getElementById("cartPanel").classList.add("open"); 
+    document.getElementById("cartOverlay").classList.remove("opacity-0","pointer-events-none"); 
+    document.getElementById("cartOverlay").classList.add("opacity-100","pointer-events-auto"); 
+    document.body.style.overflow="hidden"; 
+}
+function closeCart() { 
+    document.getElementById("cartPanel").classList.remove("open"); 
+    document.getElementById("cartPanel").classList.add("closed"); 
+    document.getElementById("cartOverlay").classList.remove("opacity-100","pointer-events-auto"); 
+    document.getElementById("cartOverlay").classList.add("opacity-0","pointer-events-none"); 
+    document.body.style.overflow=""; 
 }
 
-function closeCart() {
-    document.getElementById("cartPanel").classList.remove("open");
-    document.getElementById("cartPanel").classList.add("closed");
-    document.getElementById("cartOverlay").classList.add("opacity-0", "pointer-events-none");
-    document.body.style.overflow = "";
+function sendWhatsApp() {
+    if(cart.length===0) return;
+    let msg = "🛍️ %2AFOAMI PREMIUM INVERSIONES GUICAR 2025%2A%0A%0A";
+    cart.forEach(item => {
+        const cantidadTexto = item.esPaquete ? `${item.cantidadUnidades/item.unidadesPorPaquete} paquetes (${item.cantidadUnidades} und)` : `${item.cantidadUnidades} unidad(es)`;
+        msg += `• ${item.nombre} — ${item.categoryNombre} → ${cantidadTexto}%0A`;
+    });
+    msg += `%0A📦 *Total unidades:* ${cart.reduce((s,i)=>s+i.cantidadUnidades,0)}%0A✨ ¡Listo para cotizar!`;
+    window.open(`https://wa.me/584122891366?text=${msg}`, '_blank');
 }
 
+// ========== INICIO ==========
 document.addEventListener("DOMContentLoaded", () => {
-    renderCategories();
     loadCart();
+    renderCategories();
     lucide.createIcons();
 });
