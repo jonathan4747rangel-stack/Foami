@@ -161,7 +161,7 @@ function updateCartUI() {
         floatingBtn.style.borderColor = cartColor;
         floatingBtn.style.boxShadow = `0 0 8px ${cartColor}`;
     }
-    const cartIcon = document.querySelector('header button i');
+    const cartIcon = document.querySelector('header .relative button:last-child i');
     if (cartIcon) {
         cartIcon.style.color = totalUnits > 0 ? cartColor : '';
     }
@@ -280,16 +280,19 @@ function renderCategories() {
     const grid = document.getElementById("categoryGrid");
     if(!grid) return;
     grid.innerHTML = categories.map(cat => `
-        <div class="glass-card rounded-2xl p-5 cursor-pointer transition-all duration-300 hover:border-orange-500/40 group" onclick="openCategory('${cat.id}')">
+        <div class="glass-card rounded-2xl p-5 cursor-pointer transition-all duration-300 group category-card" onclick="openCategory('${cat.id}')">
             <div class="flex justify-between items-start mb-4">
                 <div class="w-11 h-11 rounded-xl bg-white/5 flex items-center justify-center border border-white/10">
+                    <!-- Ícono fijo "layers" para todas las categorías -->
                     <i data-lucide="layers" class="w-5 h-5 text-orange-400"></i>
                 </div>
             </div>
             <h3 class="text-xl font-bold text-white mb-1.5">${cat.nombre}</h3>
             <p class="text-white font-bold mb-3" style="text-shadow: 0 0 10px rgba(255,255,255,0.6);">✨ ${cat.totalColores} colores disponibles</p>
             <p class="text-base font-bold text-neon-green">${cat.esPaquete ? 'Paquete x10 unidades' : 'Venta por unidad'}</p>
-            <div class="mt-4 text-orange-400 text-sm flex items-center gap-1 font-medium group-hover:gap-2 transition-all">Explorar paleta <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></div>
+            <div class="mt-4 text-sm flex items-center gap-1 font-medium group-hover:gap-2 transition-all explore-text">
+                Explorar paleta <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </div>
         </div>
     `).join('');
     lucide.createIcons();
