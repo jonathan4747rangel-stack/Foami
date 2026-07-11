@@ -13,12 +13,34 @@
     transition: all 0.3s ease;
 }
 
+/* ===== NUEVO: hover dinámico con colores del tema ===== */
 .glass-card:hover {
-    border-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6);
+    border-color: var(--color-primary, #7c3aed);
+    box-shadow: 0 20px 35px -12px var(--color-glow, rgba(124, 58, 237, 0.25));
     transform: translateY(-3px);
 }
 
+.category-card .explore-text {
+    color: #f97316; /* naranja por defecto */
+    transition: color 0.3s ease;
+}
+.category-card:hover .explore-text {
+    color: var(--color-primary, #7c3aed);
+}
+
+/* Hover para los swatches de color */
+.swatch-item {
+    transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    border: 1px solid transparent;
+}
+.swatch-item:hover {
+    border-color: var(--color-primary, #7c3aed);
+    box-shadow: 0 0 20px var(--color-glow, rgba(124, 58, 237, 0.3));
+    transform: translateY(-5px) scale(1.02);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
     width: 5px;
 }
@@ -30,15 +52,7 @@
     border-radius: 10px;
 }
 
-.swatch-item {
-    transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-}
-.swatch-item:hover {
-    transform: translateY(-5px) scale(1.02);
-    background: rgba(255,255,255,0.08);
-    border-color: rgba(255,255,255,0.3);
-}
-
+/* Carrito */
 .cart-panel {
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -52,6 +66,7 @@
     transition: opacity 0.35s ease;
 }
 
+/* Toast */
 .toast-enter {
     animation: toastSlide 0.3s ease-out forwards;
 }
@@ -94,9 +109,10 @@ header button i {
 
 .neon-primary {
     color: var(--color-primary, #7c3aed);
-    text-shadow: 0 0 6px var(--color-glow, rgba(124,58,237,0.3));
+    text-shadow: 0 0 6px var(--color-glow, rgba(124, 58, 237, 0.3));
 }
 
-#clearModal .scale-95 { transform: scale(0.95); }
-#clearModal .scale-100 { transform: scale(1); }
-#clearModal .transition-all { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+/* Clase auxiliar para usar el color del tema en texto */
+.text-primary {
+    color: var(--color-primary, #7c3aed);
+}
